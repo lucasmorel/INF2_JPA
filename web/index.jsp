@@ -34,6 +34,24 @@
                     </tr>
                 </c:forEach>
             </table>
+        </c:if><h1>Liste des auteurs</h1>
+        <br/>
+        <c:if test="${authors.size() > 0}">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Prénom de l'auteur</th>
+                    <th>Nom de l'auteur</th>
+                </tr>
+                <c:forEach items="${authors}" var="author">
+                    <tr>
+                        <td>${author.id}</td>
+                        <td>${author.getFirstname()}</td>
+                        <td>${author.getLastname()}</td>
+                    </tr>
+                </c:forEach>
+            </table>
         </c:if>
+        
     </body>
 </html>

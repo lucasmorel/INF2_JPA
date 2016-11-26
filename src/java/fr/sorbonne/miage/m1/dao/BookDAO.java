@@ -23,23 +23,17 @@ EntityManager em = emf.createEntityManager();
     
     @Override
     public void create(Book obj) {
-        em.getTransaction().begin();
         em.persist(obj);
-        em.getTransaction().commit();
     }
 
     @Override
     public void update(Book obj) {
-        em.getTransaction().begin();
         em.refresh(obj);
-        em.getTransaction().commit();
     }
 
     @Override
     public void delete(Book obj) {
-        em.getTransaction().begin();
         em.remove(obj);
-        em.getTransaction().commit();
     }
 
     @Override
@@ -50,7 +44,6 @@ EntityManager em = emf.createEntityManager();
 
     @Override
     public Book findById(int id) {
-        em.getTransaction().begin();
         Book b =  em.find(Book.class, id);
         return b;
     }

@@ -15,12 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Lucas
  */
 @Entity
+@Table (name="author")
 public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;

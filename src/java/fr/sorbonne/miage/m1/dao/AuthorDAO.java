@@ -23,35 +23,27 @@ EntityManager em = emf.createEntityManager();
     
     @Override
     public void create(Author obj) {
-        em.getTransaction().begin();
         em.persist(obj);
-        em.getTransaction().commit();
     }
 
     @Override
     public void update(Author obj) {
-        em.getTransaction().begin();
         em.refresh(obj);
-        em.getTransaction().commit();
     }
 
     @Override
     public void delete(Author obj) {
-        em.getTransaction().begin();
         em.remove(obj);
-        em.getTransaction().commit();
     }
 
     @Override
     public List<Author> findAll() {
-        em.getTransaction().begin();
         List<Author> ret = em.createQuery("Select b FROM Author b").getResultList();
         return ret;
     }
 
     @Override
     public Author findById(int id) {
-        em.getTransaction().begin();
         Author b =  em.find(Author.class, id);
         return b;
     }

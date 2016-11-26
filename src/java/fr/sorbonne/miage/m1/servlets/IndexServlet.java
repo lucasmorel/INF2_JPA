@@ -5,7 +5,6 @@ import fr.sorbonne.miage.m1.beans.Book;
 import fr.sorbonne.miage.m1.dao.AuthorDAO;
 import fr.sorbonne.miage.m1.dao.BookDAO;
 import fr.sorbonne.miage.m1.dao.DAO;
-import fr.sorbonne.miage.m1.dao.JdbcBookDao;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -33,17 +32,33 @@ public class IndexServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("Processing request in IndexServlet");
-        bookDao = new BookDAO();
-        authorDao= new AuthorDAO();
-        List<Book> books = bookDao.findAll();
+        authorDao = new AuthorDAO();
+        
         Author a1 = new Author("Lucas","Morel" );
         authorDao.create(a1);
-        List<Author> authors = authorDao.findAll();
         
+        Author a2 = new Author("A","Supprimer" );
+        authorDao.create(a2);
+        
+        bookDao = new BookDAO();
+        Book b = bookDao.findById(123456);
+        if (b != null){
+            bookDao.delete(b);
+        }
+        else{
+            b = new Book(123456,"Le Livre crée", 45.0f);
+            bookDao.create(b);
+        }
+        List<Book> books = bookDao.findAll();
+        List<Author> authors = authorDao.findAll();
+         authorDao.delete(a2);
         System.out.println("NB Books : " + books.size());
         response.setContentType("text/html;charset=UTF-8");
-        request.setAttribute("books", books);
+        request.setAttribute("books", books);   
+        System.out.println("NB Authors : " + authors.size());
+        request.setAttribute("authors", authors);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
